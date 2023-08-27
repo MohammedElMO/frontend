@@ -25,3 +25,5 @@ If you are developing a production application, we recommend updating the config
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+[![DeepScan grade](https://deepscan.io/api/teams/22021/projects/25366/branches/792688/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=22021&pid=25366&bid=792688)

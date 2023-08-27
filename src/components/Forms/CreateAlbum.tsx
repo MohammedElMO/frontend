@@ -53,7 +53,7 @@ function CreateAlbum({
         <Input
           {...register("albumDesc")}
           className="disabled:cursor-not-allowed ring-1 resize-none ring-black rounded login  p-3"
-          errors={errors?.albumDesc}
+          errors={errors.albumDesc}
           type="text"
           placeHolder="write a small description of your collection/album..."
         />

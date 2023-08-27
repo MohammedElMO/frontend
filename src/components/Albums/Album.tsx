@@ -1,10 +1,10 @@
 import { useState } from "react"
-import { type Album } from "../../hooks/query/useAlbums"
+import { type AlbumT } from "../../hooks/query/useAlbums"
 import DetailsDialog from "../Dialogs/ShowDialog"
 import AlbumImg from "./AlbumImg"
 
 type AlbumProps = {
-  album: Album
+  album: AlbumT
 }
 
 function Album({ album }: AlbumProps) {

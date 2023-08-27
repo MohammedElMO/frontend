@@ -1,6 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query"
 import { imageInstance } from "../../api/apiClient"
-import { AxiosRequestConfig } from "axios"
 
 export type CuratedApiResopnse = {
   page: number

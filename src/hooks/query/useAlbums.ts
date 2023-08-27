@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import { server } from "../../api/serverApi"
 
-export type Album = {
+export type AlbumT = {
   _id: string
   content: {
     _id: string
@@ -26,7 +26,7 @@ export type Album = {
 const useAlbums = () => {
   return useQuery({
     queryKey: ["albums"],
-    queryFn: () => server.get<Album[]>("/api/album"),
+    queryFn: () => server.get<AlbumT[]>("/api/album"),
   })
 }
 export default useAlbums

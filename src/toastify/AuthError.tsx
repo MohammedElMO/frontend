@@ -7,7 +7,7 @@ function AuthError({ error }: { error: any }) {
 
   useEffect(() => {
     if (error) alertRef.current?.click()
-  }, [])
+  }, [error])
   const notify = () =>
     toast.error("There is an error accured", {
       position: "top-right",

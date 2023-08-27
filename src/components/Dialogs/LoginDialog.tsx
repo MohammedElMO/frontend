@@ -4,13 +4,8 @@ import Input from "../layout/common/Input"
 import { Fragment } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import {
-  LoginSchemaZod,
-  LoginT,
-  SiginInSchema,
-  SiginT,
-} from "../../schema/zodAuth"
-import { redirect, useNavigate } from "react-router-dom"
+import { LoginSchemaZod, LoginT } from "../../schema/zodAuth"
+import { useNavigate } from "react-router-dom"
 function LoginDialog({
   isOpen,
   setIsOpen,
@@ -92,7 +87,7 @@ function LoginDialog({
               </Button>
               <Button
                 onClick={() => {
-                  // if (isSubmitted) direct("/liked")
+                  if (isSubmitted) direct("/liked")
                 }}
                 type="submit"
                 className="bg-orange-300  transition-colors text-black rounded p-3"

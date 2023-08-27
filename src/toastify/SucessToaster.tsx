@@ -13,7 +13,7 @@ function SucessToaster({
 
   useEffect(() => {
     if (isSuccess) alertRef.current?.click()
-  }, [])
+  }, [isSuccess])
   const notify = () =>
     toast.success(message, {
       position: "top-right",

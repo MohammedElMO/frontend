@@ -7,7 +7,7 @@ function AuthSucess({ isSuccess }: { isSuccess: boolean }) {
 
   useEffect(() => {
     if (isSuccess) alertRef.current?.click()
-  }, [])
+  }, [isSuccess])
   const notify = () =>
     toast.success("👍 you've successfuly signed In", {
       position: "top-right",

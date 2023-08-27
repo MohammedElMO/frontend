@@ -7,7 +7,7 @@ function FavErrorToaster({ error }: { error: any }) {
 
   useEffect(() => {
     if (error) alertRef.current?.click()
-  }, [])
+  }, [error])
   const notify = () =>
     toast.error("There is an error accured when getting the fav Images", {
       position: "top-right",

@@ -19,10 +19,12 @@ function NavBar({
     favClass: "",
   })
   useEffect(() => {
-    window.addEventListener("resize", () => {
+    const resizeEvent = () => {
       const media = window.matchMedia("(max-width: 769px)").matches
       setShowToggerler(media)
-    })
+    }
+    window.addEventListener("resize", resizeEvent)
+    return () => window.removeEventListener("resize", resizeEvent)
   }, [showToggler])
   useEffect(() => {
     if (isLikedSuccessfully || isFavedSuccessfully)
@@ -47,7 +49,10 @@ function NavBar({
       >
         {directions.map(({ id, ICON, text, to }) => (
           <li key={id}>
-            <Link to={to} className={`flex gap-1 items-center p-3  rounded hover:bg-slate-400/10`}>
+            <Link
+              to={to}
+              className={`flex gap-1 items-center p-3  rounded hover:bg-slate-400/10`}
+            >
               <ICON
                 classA={userAction.loveClass}
                 classB={userAction.favClass}

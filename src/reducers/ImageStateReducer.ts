@@ -1,4 +1,3 @@
-import { set } from "react-hook-form"
 
 export enum ActionT {
   LIKE_IMAGE = "LIKED_IMAGE",

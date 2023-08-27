@@ -1,7 +1,6 @@
 import { FormEvent, useEffect, useState } from "react"
-import useAlbumsName, { AbumName } from "../../hooks/query/useAlbumsName"
+import  { AbumName } from "../../hooks/query/useAlbumsName"
 import useInsertIntoAlbum from "../../hooks/mutation/useInsertIntoAlbum"
-import { TruckImg } from "../../utils/getTruckImg"
 import { ImgData } from "../gallery/ImageCard"
 import AlbumList from "../Albums/AlbumList"
 import Button from "../layout/common/Button"

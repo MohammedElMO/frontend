@@ -22,7 +22,7 @@ function Favorite() {
   if (isError) return <FavErrorToaster error={isError} />
   return (
     <div className="flex flex-col pt-24 items-center  justify-center">
-      {FavImages?.data.length && (
+      {FavImages?.data.length > 0 && (
         <DeleteButton onDelete={() => setIsDeleteDialogOpen(true)} />
       )}
       {isDelete && (

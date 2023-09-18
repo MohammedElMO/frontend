@@ -1,5 +1,5 @@
 import axios from "axios"
 
 export const server = axios.create({
-baseURL: "http://localhost:4000",
+  baseURL: "https://galleryapp-z1mc.onrender.com",
 })

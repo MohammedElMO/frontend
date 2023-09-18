@@ -1,4 +1,3 @@
-import Search from "../../svgs/Search"
 import Button from "./Button"
 
 function SearchButton({

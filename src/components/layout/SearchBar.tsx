@@ -1,11 +1,9 @@
 import Input from "../layout/common/Input"
-import SearchButton from "../layout/common/SearchButton"
 import Logo from "../layout/common/logo"
 import { type Action, ActionT } from "../../reducers/ImageStateReducer"
 import { useState } from "react"
 import { useLocation } from "react-router-dom"
 import Search from "../svgs/Search"
-import { ClipLoader } from "react-spinners"
 import Button from "./common/Button"
 
 function SearchBar({ dispatch }: { dispatch: React.Dispatch<Action> }) {

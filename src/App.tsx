@@ -6,7 +6,6 @@ import Favorite from "./components/pages/favorite"
 import Core from "./components/layout/Core"
 import ImageGrid from "./components/gallery/ImageGrid"
 import Home from "./components/pages/Home"
-import ProtectedRoute from "./components/Routes/ProtectedRoute"
 function App() {
   return (
     <>

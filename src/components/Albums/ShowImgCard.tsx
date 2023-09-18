@@ -17,9 +17,6 @@ type ImageProps = {
     alt: string
     isChecked: boolean
   }
-  showSelection: boolean
-  onSelect: () => void
-  selectedImgs: string[]
 }
 
 function ShowImgCard({
@@ -29,22 +26,15 @@ function ShowImgCard({
     photographer_url,
     src: { tiny },
     isChecked,
-    _id,
   },
-  selectedImgs,
-  onSelect,
 }: ImageProps) {
-  const imgSelected = selectedImgs.find((i) => i.includes(_id))
   return (
     <article
-      onClick={onSelect}
       className={`relative flex-1  cursor-pointer font-brico shadow-xl ${
         isChecked ? "bg-black/50" : ""
       }`}
     >
-      {imgSelected && (
-        <div className="absolute inset-0 rounded-md bg-black/50"></div>
-      )}
+     
       <img
         src={tiny}
         alt={alt}

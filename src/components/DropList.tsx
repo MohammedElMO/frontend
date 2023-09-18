@@ -64,7 +64,7 @@ function DropList({ data: ImgData, createAlbum }: ListProps) {
                     active && "bg-orange-500 text-white "
                   } flex items-center gap-2 mt-2  rounded`}
                   onClick={() => {
-                    mutate({ ...ImgData })
+                    mutate(ImgData)
                   }}
                 >
                   <Fav color="currentColor" />

@@ -9,6 +9,8 @@ export const pickFavOnly = (data: ImgData) => {
     src: {
       tiny: data.src.tiny,
       small: data.src.small,
+      landscape: data.src.landscape,
+      portrait: data.src.portrait,
     },
     alt: data.alt,
   }

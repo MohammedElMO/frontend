@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react"
-import { Fragment, useEffect, useRef, useState } from "react"
+import { Fragment, useEffect, useRef } from "react"
 import Button from "../layout/common/Button"
 import ShowImgCard from "../Albums/ShowImgCard"
 import useDeleteAlbumImgs from "../../hooks/mutation/useDeleteAlbums"
@@ -35,24 +35,19 @@ function DetailsDialog({
   isDetailsOpen,
 }: Details) {
   const scroll = useRef<HTMLDivElement>(null)
-  const [showSelection, setShowSelection] = useState(false)
-  const [selectedImgs, setSelectedImgs] = useState<string[]>([])
 
   useEffect(() => {
     scroll.current?.scrollTo(0, 0)
   }, [])
   const { dispatch } = useOutletContext<DispatchT>()
-  const { mutate, isSuccess } = useDeleteAlbumImgs()
+  const { isSuccess } = useDeleteAlbumImgs()
   useEffect(() => {
     if (isSuccess) {
       dispatch({
         type: ActionT.ALBUM_IMG_DELETE,
         payLoad: [albumName, isSuccess],
       })
-      dispatch({
-        type: ActionT.ALBUM_DELETE_COUNT,
-        payload: selectedImgs.length,
-      })
+
       setIsDetailsOpen()
     }
   }, [isSuccess])
@@ -70,7 +65,7 @@ function DetailsDialog({
     >
       <Dialog
         as="div"
-        className="font-brico  absolute inset-0  w-[80%] h-[80%] z-50 "
+        className="font-brico  absolute inset-0  w-[80%] h-[80%] z-50  "
         onClose={() => null}
       >
         <Dialog.Panel className="bg-white  flex ring ring-orange-400 flex-col  justify-between w-full h-full shadow-xl p-2 rounded-lg ">
@@ -78,20 +73,8 @@ function DetailsDialog({
             as="h1"
             className="text-xl p-5 text-center font-semibold mb-2"
           >
-            This Is Your Saved Album {albumName}
+            This is Your Saved Album {albumName}
           </Dialog.Title>
-          <div className="flex justify-end p-3">
-            <Button
-              disabled={selectedImgs.length === 0}
-              onClick={() => {
-                setShowSelection(!showSelection)
-                mutate(selectedImgs)
-              }}
-              className="disabled:bg-red-300  disabled:cursor-not-allowed  px-3 py-1 rounded-md  bg-red-500 text-white ring-1 ring-red-500 "
-            >
-              {selectedImgs.length === 0 ? "select to Delete" : "Delete"}
-            </Button>
-          </div>
 
           <Dialog.Description
             as="div"
@@ -99,19 +82,7 @@ function DetailsDialog({
             className="h-full overflow-y-scroll rounded grid grid-cols-3 gap-3"
           >
             {album.map((img) => (
-              <ShowImgCard
-                selectedImgs={selectedImgs}
-                onSelect={() =>
-                  setSelectedImgs((ids) =>
-                    ids.find((i) => i === img._id)!
-                      ? ids.filter((i) => i !== img._id)
-                      : [...ids, img._id],
-                  )
-                }
-                showSelection={showSelection}
-                key={img._id}
-                albumData={img}
-              />
+              <ShowImgCard key={img._id} albumData={img} />
             ))}
           </Dialog.Description>
 
@@ -121,9 +92,6 @@ function DetailsDialog({
               onClick={setIsDetailsOpen}
             >
               Done
-            </Button>
-            <Button className="p-3 rounded-md transition-colors bg-orange-500 text-white hover:ring-1 hover:ring-orange-400 hover:bg-white hover:text-black">
-              I'm Sure!
             </Button>
           </section>
         </Dialog.Panel>

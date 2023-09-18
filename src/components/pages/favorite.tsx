@@ -10,16 +10,16 @@ import useDeleteAllFavs from "../../hooks/mutation/useDeleteAllFavs"
 
 function Favorite() {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
-  const { mutate: DeleteAll, isSuccess: deletedWithSucess } = useDeleteAllFavs()
+  const DeleteFavApi = useDeleteAllFavs()
   const { data: FavImages, isError, isLoading } = useQureyFavImages()
   const isDelete =
-    isDeleteDialogOpen || deletedWithSucess || FavImages?.data.length === 0
+    isDeleteDialogOpen || DeleteFavApi.isSuccess || FavImages?.data.length === 0
   const isNoData = FavImages?.data.length === 0
-
 
   if (isNoData) return <EmptyState message="There is not Fav Images " />
   if (isLoading) return <Loader />
   if (isError) return <FavErrorToaster error={isError} />
+
   return (
     <div className="flex flex-col pt-24 items-center  justify-center">
       {FavImages?.data.length > 0 && (
@@ -29,8 +29,8 @@ function Favorite() {
         <div className="absolute z-30 inset-0 bg-black bg-opacity-50"></div>
       )}
       <DeleteFavDialog
-        DeleteAll={DeleteAll}
-        isSuccess={deletedWithSucess}
+        DeleteAll={DeleteFavApi.mutate}
+        isSuccess={DeleteFavApi.isSuccess}
         setIsDeleteDialogOpen={setIsDeleteDialogOpen}
         isDeleteDialogOpen={isDeleteDialogOpen}
       />

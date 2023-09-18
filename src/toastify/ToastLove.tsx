@@ -1,24 +1,28 @@
-import { useEffect} from "react"
+import { useEffect, useRef } from "react"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
-function AuthSucess({ isSuccess ,message}: { isSuccess: boolean,message:string }) {
-  useEffect(() => {
-    if (isSuccess) notify()
-  }, [isSuccess])
+function ToastLove({isSuccess}:{isSuccess:boolean}) {
+  const alertRef = useRef<HTMLButtonElement>(null)
+    useEffect(() => {
+      if (isSuccess) alertRef.current?.click()
+    }, [isSuccess])
+
   const notify = () =>
-    toast.success(message, {
+    toast("💘 you Lived it ", {
       position: "top-right",
-      autoClose: 5000,
+      autoClose: 1000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "colored",
+      theme: "light",
+      className:"bg-pink-400 text-pink-200"
     })
   return (
     <div>
+      <button onClick={notify} ref={alertRef} hidden />
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -29,9 +33,11 @@ function AuthSucess({ isSuccess ,message}: { isSuccess: boolean,message:string }
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="colored"
+        theme="light"
       />
+      <ToastContainer />
     </div>
   )
 }
-export default AuthSucess
+
+export default ToastLove

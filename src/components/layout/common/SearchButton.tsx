@@ -4,18 +4,18 @@ import Button from "./Button"
 function SearchButton({
   onSearch,
   isDisabled,
+  children,
 }: {
   isDisabled: boolean
   onSearch: () => void
+  children: React.ReactNode
 }) {
   return (
     <Button
       disabled={isDisabled}
       onClick={onSearch}
-      className="hover:bg-orange-400 disabled:bg-orange-200 disabled:cursor-not-allowed bg-orange-500 font-brico flex gap-2 items-center text-white px-3 py-2 absolute right-[5px] rounded"
     >
-      search
-      <Search />
+      {children}
     </Button>
   )
 }

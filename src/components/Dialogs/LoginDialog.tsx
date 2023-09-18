@@ -10,10 +10,12 @@ function LoginDialog({
   isOpen,
   setIsOpen,
   message,
+  EnableSignIn,
 }: {
   isOpen: boolean
   setIsOpen: () => void
   message: string
+  EnableSignIn: () => void
 }) {
   const direct = useNavigate()
   const {
@@ -28,7 +30,10 @@ function LoginDialog({
 
   const LogIn: SubmitHandler<LoginT> = (data) => {
     if (!data) return
-    console.log(data)
+    if (isSubmitted) {
+      direct("/gallery")
+      setIsOpen()
+    }
   }
 
   return (
@@ -44,7 +49,7 @@ function LoginDialog({
     >
       <Dialog
         as="div"
-        className="z-30 font-brico absolute left-[40%] top-[20%] "
+        className="z-30 font-brico absolute right-1/3  bottom-44 "
         onClose={() => console.log("hello")}
       >
         <Dialog.Panel className="bg-white p-5 rounded-lg">
@@ -86,9 +91,6 @@ function LoginDialog({
                 Cancel
               </Button>
               <Button
-                onClick={() => {
-                  if (isSubmitted) direct("/liked")
-                }}
                 type="submit"
                 className="bg-orange-300  transition-colors text-black rounded p-3"
               >
@@ -98,9 +100,12 @@ function LoginDialog({
           </form>
 
           <Dialog.Description>
-            if you don't an have an Acount
-            <a href="" className="text-orange-300 text-mdS">
-              {"  "}
+            if you don't an have an Acount{" "}
+            <a
+              href="#"
+              onClick={EnableSignIn}
+              className="text-orange-300 text-md"
+            >
               signin?
             </a>
           </Dialog.Description>

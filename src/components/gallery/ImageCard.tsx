@@ -1,5 +1,4 @@
 import { useState } from "react"
-// import { getDescription } from "../../utils/getdescription"
 import DropList from "../DropList"
 import Heart from "../svgs/Heart"
 import { pickFavOnly } from "../../utils/pickFavOnly"
@@ -33,28 +32,18 @@ type ImageProps = {
   createAlbum: () => void
 }
 
-function ImageCard({
-  setIsLoved,
-  createAlbum,
-  data: {
-    alt,
-    photographer,
-    photographer_url,
-    src,
-    url: ImgUrl,
-  },
-  data,
-}: ImageProps) {
-  const desc = getDescription(ImgUrl)
+function ImageCard({ setIsLoved, createAlbum, data }: ImageProps) {
+  const desc = getDescription(data.url)
   const [heart, setHeart] = useState(false)
+  const favouriteImg = pickFavOnly(data)
 
   return (
     <article
       className={`relative group h-full overflow-hidden    font-brico scale-75 justify-self-end rounded-md shadow-xl `}
     >
       <img
-        src={src.large}
-        alt={alt}
+        src={data.src.large}
+        alt={data.alt}
         loading="lazy"
         className="h-full w-full object-cover"
       />
@@ -69,14 +58,14 @@ function ImageCard({
           classA="scale-150 z-20 cursor-pointer"
         />
       </div>
-      <DropList createAlbum={createAlbum} data={pickFavOnly(data)} />
+      <DropList createAlbum={createAlbum} data={favouriteImg} />
       <div className="absolute inset-0 p-3 text-white   transition-transform  flex flex-col items-center   gap-4 justify-end h-full ">
         <a
           target="_blank"
-          href={photographer_url}
+          href={data.photographer_url}
           className="text-lg font-bold bg-orange-500 rounded-lg p-2  text-white hover:underline"
         >
-          {photographer}
+          {data.photographer}
         </a>
         <p className="text-center text-2xl font-semibold">{desc}</p>
       </div>

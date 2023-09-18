@@ -7,7 +7,7 @@ const useDeleteAlbumImgs = () => {
     mutationFn: (albumImgs: string[]) =>
       server.delete("/api/album", {
         headers: {
-          "Album-Imgs": albumImgs,
+          Ids: albumImgs,
         },
       }),
   })

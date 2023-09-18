@@ -9,7 +9,7 @@ function FavImageCard({
   data: {
     alt,
     photographer,
-    src: { small, tiny },
+    src: { tiny },
   },
 }: FavProps) {
   return (

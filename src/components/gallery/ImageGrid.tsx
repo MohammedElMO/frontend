@@ -4,62 +4,48 @@ import useInfiniteImages from "../../hooks/query/useInfiniteImages"
 import useMutateLikedImages from "../../hooks/mutation/useLikedImage"
 import Loader from "../layout/common/Loader"
 import { useOutletContext } from "react-router-dom"
-import { ActionT, type DispatchT } from "../../reducers/ImageStateReducer"
+import { type DispatchT } from "../../reducers/ImageStateReducer"
 import useSearchQuery from "../../hooks/query/useSearchImages"
 import AlbumDialog from "../Dialogs/CreateAlbumDialog"
 import { useEffect, useState } from "react"
+import ToastLove from "../../toastify/ToastLove"
 
 function ImageGrid() {
-  const [photo, setPhoto] = useState<ImgData>({} as ImgData)
+  const { state } = useOutletContext<DispatchT>()
+  const infinitImgQueryApi = useInfiniteImages()
+  const searchQueryApi = useSearchQuery(state.query)
   const { isSuccess, mutate } = useMutateLikedImages()
-  const [isAlbumOpen, setisAlbumOpen] = useState(false)
-  const { dispatch, state } = useOutletContext<DispatchT>()
-  const {
-    data: searchData,
-    isFetched: isThereData,
-    refetch: reFresh,
-  } = useSearchQuery(state.query)
-  const {
-    data: Images,
-    error,
-    hasNextPage,
-    fetchNextPage,
-    isLoading,
-    isFetched,
-  } = useInfiniteImages()
+  const [photo, setPhoto] = useState<ImgData>({} as ImgData)
+  const [isAlbumOpen, setIsAlbumOpen] = useState(false)
   useEffect(() => {
-    if (isSuccess)
-      dispatch({
-        type: ActionT.LIKE_IMAGE,
-        payload: isSuccess,
-      })
-    reFresh()
-  }, [isSuccess, state.query])
+    searchQueryApi.refetch()
+  }, [isSuccess])
 
   const currentFetchedImages =
-    Images?.pages.reduce(
+    infinitImgQueryApi.data?.pages.reduce(
       (total, current) => current.data.photos.length + total,
       0,
     ) || 0
 
-  if (error) return <div>No Data Has been gotten</div>
-  if (isLoading) return <Loader />
-  if (isFetched || isThereData)
-    return !searchData?.data || !state.query ? (
+  if (infinitImgQueryApi.error) return <div>No Data Has been gotten</div>
+  if (infinitImgQueryApi.isLoading) return <Loader />
+  if (infinitImgQueryApi.isFetched || searchQueryApi.isFetched)
+    return !searchQueryApi.data?.data || !state.query ? (
       <>
         <InfiniteScroll
           className="grid pt-20 py-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  h-screen text-xl relative "
           dataLength={currentFetchedImages} //This is important field to render the next data
-          next={() => fetchNextPage()}
-          hasMore={!!hasNextPage}
+          next={() => infinitImgQueryApi.fetchNextPage()}
+          hasMore={!!infinitImgQueryApi.hasNextPage}
           loader={<Loader />}
         >
-          {Images?.pages.map((page) =>
+          {isSuccess && <ToastLove isSuccess={isSuccess} />}
+          {infinitImgQueryApi.data?.pages.map((page) =>
             page.data.photos.map((photo) => (
               <ImageCard
                 createAlbum={() => {
                   setPhoto(photo)
-                  setisAlbumOpen(!isAlbumOpen)
+                  setIsAlbumOpen(!isAlbumOpen)
                 }}
                 key={photo.id}
                 data={photo}
@@ -72,16 +58,16 @@ function ImageGrid() {
         </InfiniteScroll>
         <AlbumDialog
           photo={photo}
-          setIsOpen={() => setisAlbumOpen(false)}
+          setIsOpen={() => setIsAlbumOpen(false)}
           isOpen={isAlbumOpen}
         />
       </>
     ) : (
       <div className="grid  pt-20 py-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  h-screen text-xl relative">
-        {searchData.data?.photos.map((photo) => (
+        {searchQueryApi.data.data?.photos.map((photo) => (
           <ImageCard
             createAlbum={() => {
-              setisAlbumOpen(!isAlbumOpen)
+              setIsAlbumOpen(!isAlbumOpen)
               setPhoto(photo)
             }}
             key={photo.id}
@@ -93,7 +79,7 @@ function ImageGrid() {
         ))}
         <AlbumDialog
           photo={photo}
-          setIsOpen={() => setisAlbumOpen(false)}
+          setIsOpen={() => setIsAlbumOpen(false)}
           isOpen={isAlbumOpen}
         />
       </div>

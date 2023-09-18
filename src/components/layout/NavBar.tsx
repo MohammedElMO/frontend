@@ -18,6 +18,8 @@ function NavBar({
     loveClass: "",
     favClass: "",
   })
+  const [activeLink, setActiveLink] = useState(0)
+
   useEffect(() => {
     const resizeEvent = () => {
       const media = window.matchMedia("(max-width: 769px)").matches
@@ -40,7 +42,7 @@ function NavBar({
     }
   }, [isLikedSuccessfully, isFavedSuccessfully])
   return (
-    <nav className=" flex shadow-2xl md:backdrop-blur-md bg-orange-100/30 rounded-xl items-center flex-row-reverse gap-3 fixed top-0 z-50 w-full  p-6 pb-3    ">
+    <nav className=" flex shadow-2xl md:backdrop-blur-md bg-orange-100/30 rounded-xl items-center flex-row-reverse gap-3  z-50 w-full  p-6 pb-3    ">
       <ul
         className={`transition-transform flex flex-row    x-sm:max-md:fixed x-sm:max-md:flex-col  x-sm:max-md:right-0  x-sm:max-md:bg-white x-sm:max-md:shadow-2xl x-sm:max-md:p-6 x-sm:max-md:bottom-0 x-sm:max-md:z-30 x-sm:max-md:h-full gap-6 list-none
     ${
@@ -50,8 +52,11 @@ function NavBar({
         {directions.map(({ id, ICON, text, to }) => (
           <li key={id}>
             <Link
+              onClick={() => setActiveLink(id)}
               to={to}
-              className={`flex gap-1 items-center p-3  rounded hover:bg-slate-400/10`}
+              className={`flex gap-1 items-center p-3  rounded hover:bg-slate-400/10 ${
+                activeLink === id ? "bg-slate-300 " : ""
+              } `}
             >
               <ICON
                 classA={userAction.loveClass}

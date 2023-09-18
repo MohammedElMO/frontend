@@ -14,6 +14,7 @@ function Albums() {
 
   return (
     <>
+    
       {state.toast.isSuccess && (
         <SucessToaster
           isSuccess={state.toast.isSuccess}

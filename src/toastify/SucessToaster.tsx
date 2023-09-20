@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect } from "react"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
@@ -9,10 +9,8 @@ function SucessToaster({
   message: string
   isSuccess: boolean
 }) {
-  const alertRef = useRef<HTMLButtonElement>(null)
-
   useEffect(() => {
-    if (isSuccess) alertRef.current?.click()
+    notify()
   }, [isSuccess])
   const notify = () =>
     toast.success(message, {
@@ -27,7 +25,6 @@ function SucessToaster({
     })
   return (
     <div>
-      <button onClick={notify} ref={alertRef} hidden />
       <ToastContainer
         position="top-right"
         autoClose={5000}

@@ -7,6 +7,7 @@ import Loader from "../layout/common/Loader"
 import FavImageCard from "../gallery/FavImageCard"
 import EmptyState from "../layout/EmptyStates/EmptyState"
 import useDeleteAllFavs from "../../hooks/mutation/useDeleteAllFavs"
+import SucessToaster from "../../toastify/SucessToaster"
 
 function Favorite() {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
@@ -20,7 +21,6 @@ function Favorite() {
     })
   }, [DeleteFavApi.isSuccess])
 
-  if (isNoData) return <EmptyState message="There is not Fav Images " />
   if (isLoading) return <Loader />
   if (isError) return <FavErrorToaster error={isError} />
 
@@ -29,6 +29,14 @@ function Favorite() {
       {FavImages?.data.length > 0 && (
         <DeleteButton onDelete={() => setIsDeleteDialogOpen(true)} />
       )}
+      {isNoData && <EmptyState message="There is not Fav Images " />}
+      {DeleteFavApi.isSuccess && (
+        <SucessToaster
+          isSuccess={DeleteFavApi.isSuccess}
+          message="the favs Has been Deleted Successfully"
+        />
+      )}
+
       {isDeleteDialogOpen && (
         <div className="absolute z-30 inset-0 bg-black bg-opacity-50"></div>
       )}

@@ -19,13 +19,7 @@ function DeleteFavDialog({
   isDeleteDialogOpen,
 } // refresh,
 : DeletDialogProps) {
-  if (isSuccess)
-    return (
-      <SucessToaster
-        isSuccess={isSuccess}
-        message="the favs Has been Deleted Successfully"
-      />
-    )
+  
   return (
     <Transition
       show={isDeleteDialogOpen}

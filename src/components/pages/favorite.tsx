@@ -9,7 +9,6 @@ import EmptyState from "../layout/EmptyStates/EmptyState"
 import useDeleteAllFavs from "../../hooks/mutation/useDeleteAllFavs"
 import SucessToaster from "../../toastify/SucessToaster"
 
-
 function Favorite() {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
   const DeleteFavApi = useDeleteAllFavs()
@@ -48,7 +47,7 @@ function Favorite() {
         isDeleteDialogOpen={isDeleteDialogOpen}
       />
       <section className=" min-h-screen gap-3 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 p-5">
-        {FavImages?.data.map((favImg) => (
+        {FavImages?.data?.map((favImg) => (
           <FavImageCard data={favImg} key={favImg._id} />
         ))}
       </section>

@@ -55,7 +55,7 @@ function NavBar({
               onClick={() => setActiveLink(id)}
               to={to}
               className={`flex gap-1 items-center p-3  rounded hover:bg-slate-400/10 ${
-                activeLink === id ? "bg-slate-300 " : ""
+                activeLink === id ? "bg-orange-200 " : ""
               } `}
             >
               <ICON

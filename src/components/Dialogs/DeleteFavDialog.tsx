@@ -1,7 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react"
 import React, { Fragment } from "react"
 import Button from "../layout/common/Button"
-import SucessToaster from "../../toastify/SucessToaster"
 import { UseMutateFunction } from "@tanstack/react-query"
 
 type DeletDialogProps = {
@@ -15,7 +14,6 @@ type DeletDialogProps = {
 function DeleteFavDialog({
   setIsDeleteDialogOpen,
   DeleteAll,
-  isSuccess,
   isDeleteDialogOpen,
 } // refresh,
 : DeletDialogProps) {

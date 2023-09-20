@@ -9,6 +9,7 @@ import EmptyState from "../layout/EmptyStates/EmptyState"
 import useDeleteAllFavs from "../../hooks/mutation/useDeleteAllFavs"
 import SucessToaster from "../../toastify/SucessToaster"
 
+
 function Favorite() {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
   const DeleteFavApi = useDeleteAllFavs()

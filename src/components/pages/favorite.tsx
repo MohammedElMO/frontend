@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import useQureyFavImages from "../../hooks/query/useQueryFavImg"
 import FavErrorToaster from "../../toastify/ErrorToaster"
 import DeleteFavDialog from "../Dialogs/DeleteFavDialog"
@@ -11,10 +11,14 @@ import useDeleteAllFavs from "../../hooks/mutation/useDeleteAllFavs"
 function Favorite() {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
   const DeleteFavApi = useDeleteAllFavs()
-  const { data: FavImages, isError, isLoading } = useQureyFavImages()
-  const isDelete =
-    isDeleteDialogOpen || DeleteFavApi.isSuccess || FavImages?.data.length === 0
+  const { data: FavImages, isError, isLoading, refetch } = useQureyFavImages()
   const isNoData = FavImages?.data.length === 0
+
+  useEffect(() => {
+    refetch({
+      type: "all",
+    })
+  }, [DeleteFavApi.isSuccess])
 
   if (isNoData) return <EmptyState message="There is not Fav Images " />
   if (isLoading) return <Loader />
@@ -25,7 +29,7 @@ function Favorite() {
       {FavImages?.data.length > 0 && (
         <DeleteButton onDelete={() => setIsDeleteDialogOpen(true)} />
       )}
-      {isDelete && (
+      {isDeleteDialogOpen && (
         <div className="absolute z-30 inset-0 bg-black bg-opacity-50"></div>
       )}
       <DeleteFavDialog

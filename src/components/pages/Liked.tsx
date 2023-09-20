@@ -4,9 +4,9 @@ import LikedImageCard from "../gallery/LikedImageCard"
 import EmptyState from "../layout/EmptyStates/EmptyState"
 
 function Liked() {
-  const { data: likedImgs, isError, isLoading } = useAllLikedImages()
+  const { data: likedImgs, isError, isLoading,isPaused } = useAllLikedImages()
   if (isLoading) return <Loader />
-  if (isError) return <span>{likedImgs?.status}</span>
+  if (isError ||isPaused) return <span>{likedImgs?.status}</span>
   if (!likedImgs.data.length)
     return <EmptyState message="No Liked Images are Here" />
 

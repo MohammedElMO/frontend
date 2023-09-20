@@ -9,6 +9,7 @@ type DeletDialogProps = {
   isSuccess: boolean
   setIsDeleteDialogOpen: React.Dispatch<React.SetStateAction<boolean>>
   DeleteAll: UseMutateFunction<unknown, unknown, void, unknown>
+  // refresh: () => void
 }
 
 function DeleteFavDialog({
@@ -16,7 +17,8 @@ function DeleteFavDialog({
   DeleteAll,
   isSuccess,
   isDeleteDialogOpen,
-}: DeletDialogProps) {
+} // refresh,
+: DeletDialogProps) {
   if (isSuccess)
     return (
       <SucessToaster
@@ -57,7 +59,10 @@ function DeleteFavDialog({
               Cancel
             </Button>
             <Button
-              onClick={() => DeleteAll()}
+              onClick={() => {
+                DeleteAll()
+                setIsDeleteDialogOpen(false)
+              }}
               className="transition-colors bg-red-400 hover:bg-white hover:text-red-400 text-white py-2 px-3 rounded hover:ring-1 hover:ring-red-400"
             >
               I'm Sure!

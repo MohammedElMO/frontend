@@ -3,6 +3,7 @@ import DropList from "../DropList"
 import Heart from "../svgs/Heart"
 import { pickFavOnly } from "../../utils/pickFavOnly"
 import { getDescription } from "../../utils/getdescription"
+
 export type ImgData = {
   id: number
   width: number
@@ -39,7 +40,7 @@ function ImageCard({ setIsLoved, createAlbum, data }: ImageProps) {
 
   return (
     <article
-      className={`relative group h-full overflow-hidden    font-brico scale-75 justify-self-end rounded-md shadow-xl `}
+      className={` group overflow-hidden scale-75 justify-self-end rounded-lg shadow-xl `}
     >
       <img
         src={data.src.large}
@@ -48,7 +49,7 @@ function ImageCard({ setIsLoved, createAlbum, data }: ImageProps) {
         className="h-full w-full object-cover"
       />
 
-      <div className=" flex  absolute p-5 top-0 right-0   h-20">
+      <div className="flex absolute p-5 top-0 right-0  h-20">
         <Heart
           isLoved={heart}
           onLike={() => {

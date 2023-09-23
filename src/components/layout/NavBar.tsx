@@ -42,7 +42,7 @@ function NavBar({
     }
   }, [isLikedSuccessfully, isFavedSuccessfully])
   return (
-    <nav className=" flex shadow-2xl md:backdrop-blur-md bg-orange-100/30 rounded-xl items-center flex-row-reverse gap-3  z-50 w-full  p-6 pb-3    ">
+    <nav className=" flex shadow-2xl md:backdrop-blur-md bg-orange-100/30 rounded-xl items-center flex-row-reverse gap-3  z-50 w-full  p-6 pb-3 sticky top-0  ">
       <ul
         className={`transition-transform flex flex-row    x-sm:max-md:fixed x-sm:max-md:flex-col  x-sm:max-md:right-0  x-sm:max-md:bg-white x-sm:max-md:shadow-2xl x-sm:max-md:p-6 x-sm:max-md:bottom-0 x-sm:max-md:z-30 x-sm:max-md:h-full gap-6 list-none
     ${

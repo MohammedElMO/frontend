@@ -31,13 +31,6 @@ function SearchBar({ dispatch }: { dispatch: React.Dispatch<Action> }) {
             })
           }
         >
-          {/* <ClipLoader
-              color="#FFA500"
-              cssOverride={{
-                height: "23px",
-                width: "23px",
-              }}
-            /> */}
           search
           <Search />
         </Button>

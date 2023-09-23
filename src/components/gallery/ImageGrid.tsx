@@ -63,7 +63,7 @@ function ImageGrid() {
         />
       </>
     ) : (
-      <div className="grid  pt-20 py-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  h-screen text-xl relative">
+      <div className="grid font-brico  sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 text-xl">
         {searchQueryApi.data.data?.photos.map((photo) => (
           <ImageCard
             createAlbum={() => {

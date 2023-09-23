@@ -12,8 +12,8 @@ import SucessToaster from "../../toastify/SucessToaster"
 function Favorite() {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
   const DeleteFavApi = useDeleteAllFavs()
-  const { data: FavImages, isError, isLoading, refetch } = useQureyFavImages()
-  const isNoData = FavImages?.data.length === 0
+  const { data: favImages, isError, isLoading, refetch } = useQureyFavImages()
+  const isNoData = favImages?.data.length === 0
 
   useEffect(() => {
     refetch({
@@ -26,7 +26,7 @@ function Favorite() {
 
   return (
     <div className="flex flex-col pt-24 items-center  justify-center">
-      {FavImages?.data.length > 0 && (
+      {favImages?.data.length > 0 && (
         <DeleteButton onDelete={() => setIsDeleteDialogOpen(true)} />
       )}
       {isNoData && <EmptyState message="There is not Fav Images " />}
@@ -47,7 +47,7 @@ function Favorite() {
         isDeleteDialogOpen={isDeleteDialogOpen}
       />
       <section className=" min-h-screen gap-3 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 p-5">
-        {FavImages?.data?.map((favImg) => (
+        {favImages?.data.map((favImg) => (
           <FavImageCard data={favImg} key={favImg._id} />
         ))}
       </section>
